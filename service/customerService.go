@@ -1,9 +1,13 @@
 package service
 
-import "github.com/KuSeMi/banking/domain"
+import (
+	"github.com/KuSeMi/banking/domain"
+	"github.com/KuSeMi/banking/errs"
+)
 
 type CustomerService interface {
 	GetAllCustomer() ([]domain.Customer, error)
+	GetCustomer(string) (*domain.Customer, *errs.AppError)
 }
 
 type DefaultCustomerService struct {
@@ -12,6 +16,10 @@ type DefaultCustomerService struct {
 
 func (s DefaultCustomerService) GetAllCustomer() ([]domain.Customer, error) {
 	return s.repo.FindAll()
+}
+
+func (s DefaultCustomerService) GetCustomer(id string) (*domain.Customer, *errs.AppError) {
+	return s.repo.ById(id)
 }
 
 func NewCustomerService(repository domain.CustomerRepository) DefaultCustomerService {
