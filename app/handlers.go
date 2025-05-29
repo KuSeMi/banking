@@ -1,9 +1,11 @@
-package main
+package app
 
 import (
 	"encoding/json"
 	"encoding/xml"
 	"net/http"
+
+	"github.com/KuSeMi/banking/service"
 )
 
 type Customer struct {
@@ -12,18 +14,24 @@ type Customer struct {
 	Zipcode string `json:"zip_code" xml:"zipcode"`
 }
 
-func getAllCustomers(w http.ResponseWriter, r *http.Request) {
-	custmers := []Customer{
-		{"Siro", "Kyiv", "01001"},
-		{"Eugene", "Kyiv", "01001"},
-	}
+type CustomerHandlers struct {
+	service service.CustomerService
+}
+
+func (ch *CustomerHandlers) getAllCustomers(w http.ResponseWriter, r *http.Request) {
+	// customers := []Customer{
+	// 	{"Siro", "Kyiv", "01001"},
+	// 	{"Eugene", "Kyiv", "01001"},
+	// }
+
+	customers, _ := ch.service.GetAllCustomer()
 
 	if r.Header.Get("Content-Type") == "application/xml" {
 		w.Header().Add("Content-Type", "application/xml")
-		xml.NewEncoder(w).Encode(custmers)
+		xml.NewEncoder(w).Encode(customers)
 	} else {
 		w.Header().Add("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(custmers)
+		json.NewEncoder(w).Encode(customers)
 	}
 
 }
