@@ -186,7 +186,11 @@ The application uses a MySQL database with the following structure:
 ### Prerequisites
 
 - Docker and Docker Compose installed
-- Go 1.15 or higher (for local development)
+
+### For local development
+
+- GoLang installed
+- MySQL  installed
 
 ### Environment Variables
 
@@ -223,21 +227,20 @@ go run main.go
 
 This project has the following direct dependencies:
 
-| Dependency                        | Description                                                                                                                        |
-|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
-| `github.com/gorilla/mux`          | A powerful HTTP router and URL matcher for building Go web servers. Used for routing and handling HTTP requests in the application.|
-| `database/sql`                    | Go's standard library package for SQL database operations. Provides a generic interface for SQL database access.                   |
-| `github.com/go-sql-driver/mysql`  | MySQL driver for Go's `database/sql` package. Enables the application to connect to MySQL databases.                               |
-| `log`                             | Go's standard logging package for error and informational logging.                                                                 |
-| `net/http`                        | Go's standard HTTP package for building web servers and handling HTTP requests.                                                    |
-| `os`                              | Go's standard library for operating system functionality like environment variables access.                                        |
+| Dependency     | Description                                                                                                                        |
+|----------------|------------------------------------------------------------------------------------------------------------------------------------|
+| `gorilla/mux`  | A powerful HTTP router and URL matcher for building Go web servers. Used for routing and handling HTTP requests in the application.|
+| `jmoiron/sqlx` | Sqlx is a library which provides a set of extensions on go's standard database/sql library                                         |
+| `mysql`        | MySQL driver for Go's `database/sql` package. Enables the application to connect to MySQL databases.                               |
+| `zap`          | Blazing fast, structured, leveled logging in Go.                                                                                   |
 
 ## Testing API Endpoints
 
 You can test the API endpoints using the HTTP request files in the `http-requests/` directory.
 
 With Visual Studio Code and the REST Client extension:
-1. Open any *http file in the [http-requests] directory
+
+1. Open any http file in the [http-requests](/http-requests/) directory
 2. Click on "Send Request" above each request definition
 
 With curl:
