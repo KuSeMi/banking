@@ -13,6 +13,6 @@ FROM alpine:latest
 
 COPY --from=builder /banking-service /banking-service
 
-EXPOSE 8080
+EXPOSE 8000
 
 CMD ["/banking-service"]

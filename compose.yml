@@ -8,6 +8,8 @@ services:
     depends_on:
       - mysql
     environment:
+      - HOST=0.0.0.0
+      - WEB_PORT=8000
       - MYSQL_HOST=mysql
       - MYSQL_USER=user
       - MYSQL_PASSWORD=password
@@ -25,7 +27,6 @@ services:
       - ./banking.sql:/docker-entrypoint-initdb.d/banking.sql
     ports:
       - "3306:3306"  
-    command: "--skip-ssl"
 
 volumes:
   mysql-data:

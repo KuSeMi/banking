@@ -2,9 +2,6 @@ package domain
 
 import (
 	"database/sql"
-	"fmt"
-	"os"
-	"time"
 
 	"github.com/KuSeMi/banking/errs"
 	"github.com/KuSeMi/banking/logger"
@@ -53,39 +50,6 @@ func (d CustomerRepositoryDb) ById(id string) (*Customer, *errs.AppError) {
 	return &c, nil
 }
 
-func NewCustomerRepositoryDB() CustomerRepositoryDb {
-	host := os.Getenv("MYSQL_HOST")
-	user := os.Getenv("MYSQL_USER")
-	password := os.Getenv("MYSQL_PASSWORD")
-	dbname := os.Getenv("MYSQL_DATABASE")
-
-	// Fallback defaults for local development
-	if host == "" {
-		host = "localhost"
-	}
-	if user == "" {
-		user = "root"
-	}
-	if password == "" {
-		password = "password"
-	}
-	if dbname == "" {
-		dbname = "banking"
-	}
-
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s", user, password, host, dbname)
-	client, err := sqlx.Open("mysql", dsn)
-	if err != nil {
-		panic(err)
-	}
-
-	if err := client.Ping(); err != nil {
-		panic(err)
-	}
-
-	client.SetConnMaxLifetime(time.Minute * 3)
-	client.SetMaxOpenConns(10)
-	client.SetMaxIdleConns(10)
-
-	return CustomerRepositoryDb{client}
+func NewCustomerRepositoryDb(dbClient *sqlx.DB) CustomerRepositoryDb {
+	return CustomerRepositoryDb{dbClient}
 }

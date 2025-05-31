@@ -27,24 +27,25 @@ CREATE TABLE `accounts` (
     `customer_id` int(11) NOT NULL,
     `opening_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `account_type` varchar(10) NOT NULL,
+    `amount` DECIMAL(10,2) NOT NULL,
     `status` tinyint(4) NOT NULL DEFAULT '1',
     PRIMARY KEY (`account_id`),
     CONSTRAINT `account_FK` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=95476 DEFAULT CHARSET=latin1;
 
 INSERT INTO `accounts` VALUES
-(95470, 2000, '2020-08-22 10:27:22', 'Saving', 1),
-(95471, 2001, '2020-06-15 10:27:22', 'Saving', 1),
-(95472, 2002, '2020-08-09 10:27:22', 'Checking', 1),
-(95473, 2000, '2020-06-03 10:27:22', 'Saving', 1),
-(95474, 2004, '2020-02-27 10:27:22', 'Checking', 1),
-(95475, 2005, '2020-03-20 10:27:22', 'Saving', 0);
+(95470, 2000, '2020-08-22 10:27:22', 'Saving', 5000.75, 1),
+(95471, 2001, '2020-06-15 10:27:22', 'Saving', 30200.50, 1),
+(95472, 2002, '2020-08-09 10:27:22', 'Checking', 15000.25, 1),
+(95473, 2000, '2020-06-03 10:27:22', 'Saving', 7800.00, 1),
+(95474, 2004, '2020-02-27 10:27:22', 'Checking', 42000.30, 1),
+(95475, 2005, '2020-03-20 10:27:22', 'Saving', 10000.00, 0);
 
 DROP TABLE IF EXISTS `transactions`;
 CREATE TABLE `transactions` (
     `transaction_id` int(11) NOT NULL AUTO_INCREMENT,
     `account_id` int(11) NOT NULL,
-    `amount` int(11) NOT NULL,
+    `amount` DECIMAL(10,2) NOT NULL,
     `transaction_type` varchar(10) NOT NULL,
     `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`transaction_id`),
