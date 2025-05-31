@@ -1,0 +1,5 @@
+### Get all customers
+GET http://localhost:8080/customers
+
+### Get customer by ID
+GET http://localhost:8080/customers/2001

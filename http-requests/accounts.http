@@ -1,0 +1,8 @@
+### Create a new account for a customer
+POST http://localhost:8000/customers/2001/account/95470
+Content-Type: application/json
+
+{
+  "account_type": "savings",
+  "amount": 5000
+}
